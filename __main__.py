@@ -1,6 +1,6 @@
 from openpyxl import Workbook,utils
 
-def lst2xl(lst,xlws,start_cell):
+def lst2xl(lst,xlws,start_cell='A1'):
 	
 
 	row_count = len(lst)
