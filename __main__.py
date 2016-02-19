@@ -1,4 +1,4 @@
-from openpyxl import utils
+from openpyxl import Workbook,utils
 
 def lst2xl(lst,xlws,start_cell):
 	
@@ -13,21 +13,24 @@ def lst2xl(lst,xlws,start_cell):
 	
 
 	row_start = ws[start_cell].row 
-	col_start = column_index_from_string(ws[start_cell].column)
+	col_start = utils.column_index_from_string(ws[start_cell].column)
 
 
 	coords = {'x':0,'y':0}
 	
 	for row in range(row_start,row_start+row_count):
 		for col in range(col_start,col_start+col_count):
+			try:
+				xlws.cell(row=row,column=col,value=lst[coords['y']][coords['x']])
+			except UnicodeDecodeError:
+				pass
+			
 
-			xlws.cell(row=row,column=col,value=lst[coords['y']][coords['x']])
 			coords['x'] += 1
 		coords['y'] += 1
 		coords['x'] = 0
 
-#
-	wb.save(save_dir+ rev_filename)
-	return rev_filename
+	return xlws
+
 
 
