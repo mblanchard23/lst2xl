@@ -12,8 +12,8 @@ def lst2xl(lst,xlws,start_cell='A1'):
 	col_count = len(lst[0])
 	
 
-	row_start = ws[start_cell].row 
-	col_start = utils.column_index_from_string(ws[start_cell].column)
+	row_start = xlws[start_cell].row 
+	col_start = utils.column_index_from_string(xlws[start_cell].column)
 
 
 	coords = {'x':0,'y':0}
