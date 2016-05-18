@@ -33,4 +33,15 @@ def lst2xl(lst,xlws,start_cell='A1'):
 	return xlws
 
 
-
+def lst2wb(lst):
+	wb_name = raw_input("Please enter a workbook name or fpath: ")
+	if wb_name[-5:] != '.xlsx':
+		wb_name += '.xlsx'
+	wb = Workbook()
+	ws = wb.active
+	lst2xl(lst,ws)
+	try:
+		wb.save(wb_name)
+		print "Successfully saved to %s" % (wb_name)
+	except:
+		print "Failed to save - check you have write access"
