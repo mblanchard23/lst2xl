@@ -1,4 +1,5 @@
-from openpyxl import Workbook,utils
+from openpyxl import Workbook
+from openpyxl.cell import cell
 
 def lst2xl(lst,xlws,start_cell='A1'):
 	
@@ -13,7 +14,7 @@ def lst2xl(lst,xlws,start_cell='A1'):
 	
 
 	row_start = xlws[start_cell].row 
-	col_start = utils.column_index_from_string(xlws[start_cell].column)
+	col_start = cell.column_index_from_string(xlws[start_cell].column)
 
 
 	coords = {'x':0,'y':0}
@@ -33,10 +34,13 @@ def lst2xl(lst,xlws,start_cell='A1'):
 	return xlws
 
 
-def lst2wb(lst):
-	wb_name = raw_input("Please enter a workbook name or fpath: ")
-	if wb_name[-5:] != '.xlsx':
-		wb_name += '.xlsx'
+def lst2wb(lst,fpath=None):
+	if fpath:
+		wb_name = fpath	
+	else:
+		wb_name = raw_input("Please enter a workbook name or fpath: ")
+		if wb_name[-5:] != '.xlsx':
+			wb_name += '.xlsx'
 	wb = Workbook()
 	ws = wb.active
 	lst2xl(lst,ws)
